@@ -1,0 +1,19 @@
+# Run artifacts. These list your accounts and access; keep them out of version
+# control. (Password hashes are never collected, but account names are.)
+users_plan.json
+*plan*.json
+!examples/sample_plan.json
+users_results.json
+*results*.json
+users_report.xlsx
+*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+.venv/
+venv/

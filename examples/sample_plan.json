@@ -1,0 +1,425 @@
+{
+  "schema": "linux-users.account-plan",
+  "schema_version": "1.0",
+  "generated": "2026-07-31T17:51:05+00:00",
+  "generator": {
+    "tool": "linux-users",
+    "version": "1.0.0",
+    "build": "2026-07-31.initial"
+  },
+  "options": {
+    "stale_days": 90,
+    "service_user": "sa.vko",
+    "protect": []
+  },
+  "summary": {
+    "hosts_total": 3,
+    "hosts_reachable": 2,
+    "hosts_failed": 1,
+    "accounts_total": 12,
+    "stale_candidates": 3,
+    "issues": 10,
+    "weak_keys": 1
+  },
+  "hosts": [
+    {
+      "host": "web01.zav-mb.loc",
+      "hostname": "web01.zav-mb.loc",
+      "reachable": true,
+      "error": null,
+      "facts": {
+        "hostname": "web01.zav-mb.loc",
+        "distro": "Red Hat Enterprise Linux 9.3 (Plow)",
+        "now_epoch": "1785500000"
+      },
+      "accounts": [
+        {
+          "name": "root",
+          "uid": 0,
+          "gid": 0,
+          "home": "/root",
+          "shell": "/bin/bash",
+          "gecos": "root",
+          "pw_status": "locked",
+          "max_days": 99999,
+          "last_change_days": 20000,
+          "last_login": {
+            "never": true,
+            "days": null,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [
+            "password never expires",
+            "login shell but password locked"
+          ],
+          "stale": false
+        },
+        {
+          "name": "backdoor",
+          "uid": 0,
+          "gid": 0,
+          "home": "/home/backdoor",
+          "shell": "/bin/bash",
+          "gecos": "backdoor",
+          "pw_status": "set",
+          "max_days": 99999,
+          "last_change_days": 19500,
+          "last_login": {
+            "never": true,
+            "days": null,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [
+            "password never expires"
+          ],
+          "stale": false
+        },
+        {
+          "name": "svc-nolog",
+          "uid": 900,
+          "gid": 900,
+          "home": "/var/lib/svc",
+          "shell": "/usr/sbin/nologin",
+          "gecos": "svc",
+          "pw_status": "locked",
+          "max_days": 99999,
+          "last_change_days": 20000,
+          "last_login": {
+            "never": true,
+            "days": null,
+            "known": true
+          },
+          "is_login": false,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [],
+          "stale": false
+        },
+        {
+          "name": "alice",
+          "uid": 1001,
+          "gid": 1001,
+          "home": "/home/alice",
+          "shell": "/bin/bash",
+          "gecos": "Alice",
+          "pw_status": "set",
+          "max_days": 90,
+          "last_change_days": 20500,
+          "last_login": {
+            "never": false,
+            "days": 5,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": true,
+          "protected": false,
+          "flags": [],
+          "stale": false
+        },
+        {
+          "name": "bob",
+          "uid": 1002,
+          "gid": 1002,
+          "home": "/home/bob",
+          "shell": "/bin/bash",
+          "gecos": "Bob",
+          "pw_status": "set",
+          "max_days": 99999,
+          "last_change_days": 19000,
+          "last_login": {
+            "never": false,
+            "days": 200,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": false,
+          "flags": [
+            "password never expires"
+          ],
+          "stale": true
+        },
+        {
+          "name": "carol",
+          "uid": 1003,
+          "gid": 1003,
+          "home": "/home/carol",
+          "shell": "/bin/bash",
+          "gecos": "Carol",
+          "pw_status": "locked",
+          "max_days": 99999,
+          "last_change_days": 20550,
+          "last_login": {
+            "never": true,
+            "days": null,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": false,
+          "flags": [
+            "password never expires",
+            "login shell but password locked",
+            "never logged in"
+          ],
+          "stale": false
+        },
+        {
+          "name": "dave",
+          "uid": 1004,
+          "gid": 1004,
+          "home": "/home/dave",
+          "shell": "/bin/bash",
+          "gecos": "Dave",
+          "pw_status": "set",
+          "max_days": 60,
+          "last_change_days": 20400,
+          "last_login": {
+            "never": false,
+            "days": null,
+            "known": false
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": false,
+          "flags": [],
+          "stale": false
+        },
+        {
+          "name": "eve",
+          "uid": 1005,
+          "gid": 1005,
+          "home": "/home/eve",
+          "shell": "/bin/bash",
+          "gecos": "Eve",
+          "pw_status": "empty",
+          "max_days": 99999,
+          "last_change_days": 18000,
+          "last_login": {
+            "never": false,
+            "days": 300,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": false,
+          "flags": [
+            "empty password",
+            "password never expires"
+          ],
+          "stale": true
+        },
+        {
+          "name": "olduser",
+          "uid": 1006,
+          "gid": 1006,
+          "home": "/home/olduser",
+          "shell": "/bin/bash",
+          "gecos": "Old",
+          "pw_status": "locked",
+          "max_days": 99999,
+          "last_change_days": 18500,
+          "last_login": {
+            "never": false,
+            "days": 400,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": false,
+          "flags": [
+            "password never expires",
+            "login shell but password locked"
+          ],
+          "stale": true
+        },
+        {
+          "name": "sa.vko",
+          "uid": 1100,
+          "gid": 1100,
+          "home": "/home/sa.vko",
+          "shell": "/bin/bash",
+          "gecos": "service account",
+          "pw_status": "set",
+          "max_days": 90,
+          "last_change_days": 20500,
+          "last_login": {
+            "never": false,
+            "days": 2,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [],
+          "stale": false
+        }
+      ],
+      "sudoers": [
+        {
+          "source": "/etc/sudoers",
+          "entry": "%wheel ALL=(ALL) ALL",
+          "nopasswd": false
+        },
+        {
+          "source": "/etc/sudoers.d/deploy",
+          "entry": "deploy ALL=(ALL) NOPASSWD:ALL",
+          "nopasswd": true
+        }
+      ],
+      "keys": [
+        {
+          "user": "alice",
+          "type": "ssh-ed25519",
+          "comment": "alice@laptop",
+          "weak": false
+        },
+        {
+          "user": "bob",
+          "type": "ssh-dss",
+          "comment": "bob-old-key",
+          "weak": true
+        },
+        {
+          "user": "bob",
+          "type": "ssh-rsa",
+          "comment": "bob@work",
+          "weak": false
+        }
+      ],
+      "checks": {
+        "duplicate_uid0": [
+          "backdoor",
+          "root"
+        ],
+        "duplicate_uids": {},
+        "empty_passwords": [
+          "eve"
+        ]
+      },
+      "candidates": [
+        {
+          "user": "bob",
+          "uid": 1002,
+          "last_login_days": 200,
+          "action": "lock_account"
+        },
+        {
+          "user": "eve",
+          "uid": 1005,
+          "last_login_days": 300,
+          "action": "lock_account"
+        },
+        {
+          "user": "olduser",
+          "uid": 1006,
+          "last_login_days": 400,
+          "action": "lock_account"
+        }
+      ],
+      "counts": {
+        "accounts": 10,
+        "stale": 3,
+        "issues": 9,
+        "weak_keys": 1
+      }
+    },
+    {
+      "host": "db01.zav-mb.loc",
+      "hostname": "db01.zav-mb.loc",
+      "reachable": true,
+      "error": null,
+      "facts": {
+        "hostname": "db01.zav-mb.loc",
+        "distro": "Red Hat Enterprise Linux 9.4 (Plow)",
+        "now_epoch": "1785500000"
+      },
+      "accounts": [
+        {
+          "name": "root",
+          "uid": 0,
+          "gid": 0,
+          "home": "/root",
+          "shell": "/bin/bash",
+          "gecos": "root",
+          "pw_status": "locked",
+          "max_days": 99999,
+          "last_change_days": 20000,
+          "last_login": {
+            "never": true,
+            "days": null,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [
+            "password never expires",
+            "login shell but password locked"
+          ],
+          "stale": false
+        },
+        {
+          "name": "sa.vko",
+          "uid": 1100,
+          "gid": 1100,
+          "home": "/home/sa.vko",
+          "shell": "/bin/bash",
+          "gecos": "svc",
+          "pw_status": "set",
+          "max_days": 90,
+          "last_change_days": 20500,
+          "last_login": {
+            "never": false,
+            "days": 1,
+            "known": true
+          },
+          "is_login": true,
+          "sudo_capable": false,
+          "protected": true,
+          "flags": [],
+          "stale": false
+        }
+      ],
+      "sudoers": [],
+      "keys": [],
+      "checks": {
+        "duplicate_uid0": [],
+        "duplicate_uids": {},
+        "empty_passwords": []
+      },
+      "candidates": [],
+      "counts": {
+        "accounts": 2,
+        "stale": 0,
+        "issues": 1,
+        "weak_keys": 0
+      }
+    },
+    {
+      "host": "app02.zav-mb.loc",
+      "reachable": false,
+      "error": "Connection timed out",
+      "facts": {},
+      "accounts": [],
+      "sudoers": [],
+      "keys": [],
+      "checks": {},
+      "candidates": [],
+      "counts": {
+        "accounts": 0,
+        "stale": 0,
+        "issues": 0
+      }
+    }
+  ],
+  "notes": [
+    "fixture fleet: one host with stale accounts, dup UID 0, empty password, weak key; one clean; one down"
+  ]
+}

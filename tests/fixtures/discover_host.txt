@@ -1,0 +1,47 @@
+===FACTS===
+hostname=web01.zav-mb.loc
+distro=Red Hat Enterprise Linux 9.3 (Plow)
+now_epoch=1785500000
+===PASSWD===
+root:x:0:0:root:/root:/bin/bash
+sa.vko:x:1100:1100:service account:/home/sa.vko:/bin/bash
+alice:x:1001:1001:Alice:/home/alice:/bin/bash
+bob:x:1002:1002:Bob:/home/bob:/bin/bash
+carol:x:1003:1003:Carol:/home/carol:/bin/bash
+dave:x:1004:1004:Dave:/home/dave:/bin/bash
+eve:x:1005:1005:Eve:/home/eve:/bin/bash
+backdoor:x:0:0:backdoor:/home/backdoor:/bin/bash
+svc-nolog:x:900:900:svc:/var/lib/svc:/usr/sbin/nologin
+olduser:x:1006:1006:Old:/home/olduser:/bin/bash
+===SHADOW===
+root|locked|99999|20000
+sa.vko|set|90|20500
+alice|set|90|20500
+bob|set|99999|19000
+carol|locked|99999|20550
+dave|set|60|20400
+eve|empty|99999|18000
+backdoor|set|99999|19500
+svc-nolog|locked|99999|20000
+olduser|locked|99999|18500
+===LASTLOG===
+root|never
+sa.vko|2
+alice|5
+bob|200
+carol|never
+dave|unknown
+eve|300
+backdoor|never
+svc-nolog|never
+olduser|400
+===SUDOERS===
+/etc/sudoers|%wheel ALL=(ALL) ALL
+/etc/sudoers.d/deploy|deploy ALL=(ALL) NOPASSWD:ALL
+===WHEEL===
+alice
+===KEYS===
+alice|ssh-ed25519|alice@laptop
+bob|ssh-dss|bob-old-key
+bob|ssh-rsa|bob@work
+===END===

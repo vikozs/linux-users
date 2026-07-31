@@ -119,6 +119,13 @@ The account model and checks are pure functions. Fixtures cover stale accounts,
 duplicate UID 0, empty passwords, weak keys, protected accounts, and the apply
 re-validation path.
 
+## Landing page
+
+A lightweight static landing page lives in [`docs/`](docs/) for GitHub
+Pages-friendly publishing without affecting the CLI package. Open
+`docs/index.html` locally in a browser to preview it, or publish the repository
+from the `docs/` folder on `main` in GitHub Pages settings.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>linux-users — audit stale accounts before they audit you</title>
+  <meta name="description" content="linux-users audits local accounts, sudoers, SSH keys, and stale logins across RHEL 9 fleets, then helps you lock or expire stale accounts with guardrails and re-validation.">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="shell">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="#top">linux-users</a>
+        <div class="navlinks">
+          <a href="#workflow">Workflow</a>
+          <a href="#safeguards">Safeguards</a>
+          <a href="#outputs">Outputs</a>
+          <a href="#usage">Usage</a>
+          <a href="https://github.com/vikozs/linux-users">GitHub</a>
+        </div>
+      </nav>
+
+      <section class="hero-copy" id="top">
+        <p class="eyebrow">RHEL 9 fleet operations</p>
+        <h1>Find stale accounts, review the evidence, and remediate with both hands on the guardrails.</h1>
+        <p class="lede">
+          <strong>linux-users</strong> is a CLI tool for sysadmins and security teams that audits local accounts,
+          sudoers, SSH keys, and last-login age across your fleet, then lets you lock or expire stale accounts
+          only after review and live re-validation. Serious controls, light personality, no “oops, we deleted Bob.”
+        </p>
+        <div class="cta-row">
+          <a class="button button-primary" href="https://github.com/vikozs/linux-users">View repository</a>
+          <a class="button" href="#usage">See commands</a>
+        </div>
+      </section>
+
+      <section class="hero-grid" aria-label="Highlights">
+        <article class="panel">
+          <span class="kicker">What it does</span>
+          <p>Audits local accounts, password status, login age, sudoers, and SSH keys across RHEL 9 hosts.</p>
+        </article>
+        <article class="panel">
+          <span class="kicker">What it changes</span>
+          <p>Only stale account lock/expire actions from a reviewed plan, with a fresh check before acting.</p>
+        </article>
+        <article class="panel">
+          <span class="kicker">What it will not do</span>
+          <p>Never deletes accounts, never edits sudoers, and never removes SSH keys. The pager may still go off, but not because of that.</p>
+        </article>
+      </section>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="section" id="workflow">
+      <div class="section-heading">
+        <p class="eyebrow">Core workflow</p>
+        <h2>Discover → review → apply</h2>
+        <p>The tool is built for cautious operators: inventory first, inspect the outputs, then apply only the plan you mean to apply.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>1. Discover</h3>
+          <p>Collect account, aging, sudoers, and SSH key data over SSH. Identify stale candidates, duplicate UID 0, empty passwords, weak keys, and risky sudo grants.</p>
+        </article>
+        <article class="card">
+          <h3>2. Review</h3>
+          <p>Open the Excel report, inspect the machine-readable plan, confirm the findings, and protect any names you want excluded before the next step.</p>
+        </article>
+        <article class="card">
+          <h3>3. Apply</h3>
+          <p>Lock stale accounts and optionally expire them, but only after a second discovery confirms they are still stale. If someone logged in since the audit, they drop out.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="safeguards">
+      <div class="section-heading">
+        <p class="eyebrow">Guardrails</p>
+        <h2>Designed to be boring in the best possible way</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Never touched</h3>
+          <ul>
+            <li><code>root</code> and every account with UID &lt; 1000</li>
+            <li>The SSH account you connected with</li>
+            <li>Any name protected with <code>--protect</code></li>
+            <li>Accounts with unknown or “never” last login status</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Never modified</h3>
+          <ul>
+            <li>No <code>userdel</code>, ever</li>
+            <li>No sudoers edits</li>
+            <li>No SSH key removal</li>
+            <li>No password hashes collected into the plan</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Operator-friendly</h3>
+          <ul>
+            <li>Per-host confirmation during apply</li>
+            <li>Passwords via stdin or <code>SSHPASS</code>, not CLI args</li>
+            <li>Formatted report for humans, JSON plan/results for automation</li>
+            <li>Re-validation before action, because change windows have a sense of humor</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="outputs">
+      <div class="section-heading">
+        <p class="eyebrow">Outputs</p>
+        <h2>Evidence for the spreadsheet crowd and the JSON crowd</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3><code>users_report.xlsx</code></h3>
+          <p>Formatted workbook with summary, accounts, stale candidates, sudoers, SSH keys, issues, errors, and an about sheet.</p>
+        </article>
+        <article class="card">
+          <h3><code>users_plan.json</code></h3>
+          <p>Structured plan containing the same findings for review, automation, and later apply operations.</p>
+        </article>
+        <article class="card">
+          <h3><code>users_results.json</code></h3>
+          <p>Apply-time record of what was actually locked per host after the re-check finished.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="usage">
+      <div class="section-heading">
+        <p class="eyebrow">Usage</p>
+        <h2>Typical operating sequence</h2>
+      </div>
+      <div class="command-grid">
+        <article class="card command-card">
+          <h3>Discover the fleet</h3>
+          <pre><code>python3 linux_users.py discover -H hosts.txt -u sa.vko \
+    --ask-ssh-pass --sudo-pass-same-as-ssh</code></pre>
+        </article>
+        <article class="card command-card">
+          <h3>Apply the reviewed plan</h3>
+          <pre><code>python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+    --ask-ssh-pass --sudo-pass-same-as-ssh</code></pre>
+        </article>
+        <article class="card command-card">
+          <h3>Lock and expire with custom protection</h3>
+          <pre><code>python3 linux_users.py discover -H hosts.txt -u sa.vko --ask-ssh-pass \
+    --sudo-pass-same-as-ssh --stale-days 120 --protect deploybot
+python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+    --ask-ssh-pass --sudo-pass-same-as-ssh --expire</code></pre>
+        </article>
+        <article class="card command-card">
+          <h3>Re-render a report only</h3>
+          <pre><code>python3 linux_users.py report --plan users_plan.json -o report.xlsx</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Related tools</p>
+        <h2>Same operational family, different maintenance headaches</h2>
+      </div>
+      <div class="link-grid">
+        <a class="link-card" href="https://github.com/vikozs/linux-audit">linux-audit</a>
+        <a class="link-card" href="https://github.com/vikozs/linux-harden">linux-harden</a>
+        <a class="link-card" href="https://github.com/vikozs/linux-diskspace">linux-diskspace</a>
+        <a class="link-card" href="https://github.com/vikozs/linux-patch">linux-patch</a>
+        <a class="link-card" href="https://github.com/vikozs/linux-certs">linux-certs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <p>Built for sysadmins, security teams, and fleet operators who prefer deliberate remediation over adventurous archaeology.</p>
+  </footer>
+</body>
+</html>

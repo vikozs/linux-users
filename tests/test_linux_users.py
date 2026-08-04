@@ -7,7 +7,7 @@ import linux_users as lu
 from ssh_exec import Result
 
 FIX = os.path.join(os.path.dirname(__file__), "fixtures")
-SERVICE = "sa.vko"
+SERVICE = "local.user"
 
 
 def fixture(name):
@@ -16,7 +16,7 @@ def fixture(name):
 
 
 def rec(name="discover_host.txt", service=SERVICE, protect=None, stale=90):
-    return lu.host_record(Result("web01.zav-mb.loc", ok=True, stdout=fixture(name)),
+    return lu.host_record(Result("web01.hostname.loc", ok=True, stdout=fixture(name)),
                           service, set(protect or []), stale)
 
 
@@ -69,11 +69,11 @@ def test_parse_keys_flags_weak():
 # --- protection / stale logic -----------------------------------------------
 
 def test_is_protected():
-    assert lu.is_protected("root", 0, "sa.vko", set())
-    assert lu.is_protected("sa.vko", 1100, "sa.vko", set())
-    assert lu.is_protected("svc", 900, "sa.vko", set())      # UID < 1000
-    assert lu.is_protected("keepme", 1001, "sa.vko", {"keepme"})
-    assert not lu.is_protected("bob", 1002, "sa.vko", set())
+    assert lu.is_protected("root", 0, "local.user", set())
+    assert lu.is_protected("local.user", 1100, "local.user", set())
+    assert lu.is_protected("svc", 900, "local.user", set())      # UID < 1000
+    assert lu.is_protected("keepme", 1001, "local.user", {"keepme"})
+    assert not lu.is_protected("bob", 1002, "local.user", set())
 
 
 def test_stale_candidates_are_correct():
@@ -81,7 +81,7 @@ def test_stale_candidates_are_correct():
     cands = {c["user"] for c in r["candidates"]}
     assert cands == {"bob", "eve", "olduser"}
     # protected / never / unknown / active are all excluded
-    assert "sa.vko" not in cands       # service account
+    assert "local.user" not in cands       # service account
     assert "backdoor" not in cands     # uid 0
     assert "carol" not in cands        # never logged in
     assert "dave" not in cands         # unknown last login

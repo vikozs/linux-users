@@ -1,10 +1,10 @@
 ===FACTS===
-hostname=web01.zav-mb.loc
+hostname=web01.hostname.loc
 distro=Red Hat Enterprise Linux 9.3 (Plow)
 now_epoch=1785500000
 ===PASSWD===
 root:x:0:0:root:/root:/bin/bash
-sa.vko:x:1100:1100:service account:/home/sa.vko:/bin/bash
+local.user:x:1100:1100:service account:/home/local.user:/bin/bash
 alice:x:1001:1001:Alice:/home/alice:/bin/bash
 bob:x:1002:1002:Bob:/home/bob:/bin/bash
 carol:x:1003:1003:Carol:/home/carol:/bin/bash
@@ -15,7 +15,7 @@ svc-nolog:x:900:900:svc:/var/lib/svc:/usr/sbin/nologin
 olduser:x:1006:1006:Old:/home/olduser:/bin/bash
 ===SHADOW===
 root|locked|99999|20000
-sa.vko|set|90|20500
+local.user|set|90|20500
 alice|set|90|20500
 bob|set|99999|19000
 carol|locked|99999|20550
@@ -26,7 +26,7 @@ svc-nolog|locked|99999|20000
 olduser|locked|99999|18500
 ===LASTLOG===
 root|never
-sa.vko|2
+local.user|2
 alice|5
 bob|3
 carol|never

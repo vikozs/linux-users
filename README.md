@@ -63,23 +63,23 @@ pip install -r requirements.txt
 Audit the fleet, writing `users_plan.json` and `users_report.xlsx`:
 
 ```
-python3 linux_users.py discover -H hosts.txt -u sa.vko \
+python3 linux_users.py discover -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh
 ```
 
 Review the report, then lock the stale accounts, confirming per host:
 
 ```
-python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh
 ```
 
 Lock and expire, with a longer stale window and an extra protected name:
 
 ```
-python3 linux_users.py discover -H hosts.txt -u sa.vko --ask-ssh-pass \
+python3 linux_users.py discover -H hosts.txt -u local.user --ask-ssh-pass \
     --sudo-pass-same-as-ssh --stale-days 120 --protect deploybot
-python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh --expire
 ```
 

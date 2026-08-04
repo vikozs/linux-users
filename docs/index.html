@@ -140,19 +140,19 @@
       <div class="command-grid">
         <article class="card command-card">
           <h3>Discover the fleet</h3>
-          <pre><code>python3 linux_users.py discover -H hosts.txt -u sa.vko \
+          <pre><code>python3 linux_users.py discover -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh</code></pre>
         </article>
         <article class="card command-card">
           <h3>Apply the reviewed plan</h3>
-          <pre><code>python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+          <pre><code>python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh</code></pre>
         </article>
         <article class="card command-card">
           <h3>Lock and expire with custom protection</h3>
-          <pre><code>python3 linux_users.py discover -H hosts.txt -u sa.vko --ask-ssh-pass \
+          <pre><code>python3 linux_users.py discover -H hosts.txt -u local.user --ask-ssh-pass \
     --sudo-pass-same-as-ssh --stale-days 120 --protect deploybot
-python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u sa.vko \
+python3 linux_users.py apply --plan users_plan.json -H hosts.txt -u local.user \
     --ask-ssh-pass --sudo-pass-same-as-ssh --expire</code></pre>
         </article>
         <article class="card command-card">

@@ -9,7 +9,7 @@
   },
   "options": {
     "stale_days": 90,
-    "service_user": "sa.vko",
+    "service_user": "local.user",
     "protect": []
   },
   "summary": {
@@ -23,12 +23,12 @@
   },
   "hosts": [
     {
-      "host": "web01.zav-mb.loc",
-      "hostname": "web01.zav-mb.loc",
+      "host": "web01.hostname.loc",
+      "hostname": "web01.hostname.loc",
       "reachable": true,
       "error": null,
       "facts": {
-        "hostname": "web01.zav-mb.loc",
+        "hostname": "web01.hostname.loc",
         "distro": "Red Hat Enterprise Linux 9.3 (Plow)",
         "now_epoch": "1785500000"
       },
@@ -240,10 +240,10 @@
           "stale": true
         },
         {
-          "name": "sa.vko",
+          "name": "local.user",
           "uid": 1100,
           "gid": 1100,
-          "home": "/home/sa.vko",
+          "home": "/home/local.user",
           "shell": "/bin/bash",
           "gecos": "service account",
           "pw_status": "set",
@@ -331,12 +331,12 @@
       }
     },
     {
-      "host": "db01.zav-mb.loc",
-      "hostname": "db01.zav-mb.loc",
+      "host": "db01.hostname.loc",
+      "hostname": "db01.hostname.loc",
       "reachable": true,
       "error": null,
       "facts": {
-        "hostname": "db01.zav-mb.loc",
+        "hostname": "db01.hostname.loc",
         "distro": "Red Hat Enterprise Linux 9.4 (Plow)",
         "now_epoch": "1785500000"
       },
@@ -366,10 +366,10 @@
           "stale": false
         },
         {
-          "name": "sa.vko",
+          "name": "local.user",
           "uid": 1100,
           "gid": 1100,
-          "home": "/home/sa.vko",
+          "home": "/home/local.user",
           "shell": "/bin/bash",
           "gecos": "svc",
           "pw_status": "set",
@@ -403,7 +403,7 @@
       }
     },
     {
-      "host": "app02.zav-mb.loc",
+      "host": "app02.hostname.loc",
       "reachable": false,
       "error": "Connection timed out",
       "facts": {},
